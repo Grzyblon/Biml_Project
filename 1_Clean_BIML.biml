@@ -4,12 +4,15 @@
     <OleDbConnection Name="Destination" ConnectionString="Data Source=.;Initial Catalog=Baza_testowa;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
   </Connections>  
   <Packages>
-    <Package Name="Paczka Ein" >    
+    <Package Name="Paczka Ein" ConstraintMode="Linear">    
       <Connections>
         <Connection ConnectionName="Source"/>
         <Connection ConnectionName="Destination"/>
       </Connections>
       <Tasks>
+	<ExecuteSQL Name="Truncate" ConnectionName="Destination">
+		  <DirectInput>TRUNCATE TABLE [dbo].[Person];</DirectInput>
+	</ExecuteSQL>
         <Dataflow Name="DFT - Person">
           <Transformations>
             <OleDbSource Name="OLE_SRC - Person" ConnectionName="Source">
