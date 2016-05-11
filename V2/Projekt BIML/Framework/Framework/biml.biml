@@ -1,0 +1,25 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Connections>
+    <OleDbConnection Name="Source" ConnectionString="Data Source=.;Initial Catalog=AdventureWorks2012;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+    <OleDbConnection Name="Destination" ConnectionString="Data Source=.;Initial Catalog=Baza_testowa;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+  </Connections>
+  <Packages>
+    <Package Name="Paczka trzecia" ConstraintMode="Linear">
+      <Tasks>
+        <ExecuteSQL Name="SQL - Truncate dbo_Person" ConnectionName="Destination">
+          <DirectInput>Truncate table dbo.Person;</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT - Person">
+          <Transformations>
+            <OleDbSource Name="OLE_SRC - Person_Person" ConnectionName="Source">
+              <ExternalTableInput Table="Person.Person" />
+            </OleDbSource>
+            <OleDbDestination Name="OLE_DST - dbo_Person" ConnectionName="Destination">
+              <ExternalTableOutput Table="dbo.Person" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+    </Package>
+  </Packages>
+</Biml>

@@ -1,0 +1,64 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">   
+  <!--<# var tablesList = new List<string>(){"Person","PersonPhone"}; #>-->   
+  <Connections>            
+    <OleDbConnection Name="Source" ConnectionString="Data Source=.;Initial Catalog=AdventureWorks2012;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+    <OleDbConnection Name="Destination" ConnectionString="Data Source=.;Initial Catalog=Baza_testowa;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+  </Connections>  
+  <Packages>
+    <Package Name="Paczka Druga" ConstraintMode="Linear"> <!--ConstraintMode="Parallel"-->
+      <Connections>
+        <Connection ConnectionName="Source"/>
+        <Connection ConnectionName="Destination"/>
+      </Connections>
+      <Tasks>
+        <# foreach (var item in tablesList) { #>
+          <!--<Container Name="CNT - <#=item#>" ConstraintMode="Linear">
+          <Tasks>-->
+            
+            <ExecuteSQL Name="Truncate <#=item#>" ConnectionName="Destination">
+		            <DirectInput>TRUNCATE TABLE [dbo].[<#=item#>];</DirectInput>
+	          </ExecuteSQL>
+          
+            <Dataflow Name="DFT - <#=item#>">
+              <Transformations>
+                <OleDbSource Name="OLE_SRC - <#=item#>" ConnectionName="Source">
+                  <ExternalTableInput Table="[Person].[<#=item#>]"/>
+                </OleDbSource>
+                <OleDbDestination Name="OLE_DST - <#=item#>" ConnectionName="Destination" >
+                  <ExternalTableOutput Table="[dbo].[<#=item#>]"/>
+                </OleDbDestination>
+              </Transformations>
+            </Dataflow>
+            
+          <!--</Tasks>
+          </Container>-->
+        <# } #>
+      </Tasks>
+      </Package>
+  </Packages>  
+</Biml>
+
+<!--USE Baza_testowa
+GO
+CREATE TABLE dbo.[Person](
+	[BusinessEntityID] [int] NOT NULL,
+	[PersonType] [nchar](2) NOT NULL,
+	[NameStyle] bit NOT NULL,
+	[Title] [nvarchar](8) NULL,
+	[FirstName] nvarchar(50) NOT NULL,
+	[MiddleName] nvarchar(50) NULL,
+	[LastName] nvarchar(50) NOT NULL,
+	[Suffix] [nvarchar](10) NULL	
+ )
+ 
+USE [Baza_testowa]
+GO
+
+CREATE TABLE [dbo].[PersonPhone](
+	[BusinessEntityID] [int] NOT NULL,
+	[PhoneNumber] nvarchar(25) NOT NULL,
+	[PhoneNumberTypeID] [int] NOT NULL,
+	[ModifiedDate] [datetime] NOT NULL 
+ )
+ 
+ -->

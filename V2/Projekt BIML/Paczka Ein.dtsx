@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="05/10/2016 20:02:22" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="WIN-EMN7P7782N9" DTS:CreatorName="Administrator" DTS:DTSID="{2CA85C3E-5FC5-4759-A5C6-85642A116D60}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1045" DTS:ObjectName="Paczka Ein" DTS:ProtectionLevel="0" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{6F2700BC-2BD0-4256-8C0B-0E6A6634CFF9}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{1625D865-2B8E-4A74-882F-1EA154054CAE}" DTS:ObjectName="Source" DTS:refId="Package.ConnectionManagers[Source]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="Data Source=.;Initial Catalog=AdventureWorks2012;Provider=SQLNCLI11.1;Integrated Security=SSPI;">
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{A1CD7874-E898-4512-BD95-89F5FE7E6D2A}" DTS:ObjectName="Destination" DTS:refId="Package.ConnectionManagers[Destination]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="Data Source=.;Initial Catalog=Baza_testowa;Provider=SQLNCLI11.1;Integrated Security=SSPI;">
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{504918B7-FDCB-4468-8ECE-F24898B39EDC}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Truncate" DTS:refId="Package\Truncate" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData SQLTask:Connection="Destination" SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[Person];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{7CCA8112-C8F2-4938-925A-B746288DA6A4}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="DFT - Person" DTS:refId="Package\DFT - Person" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" version="1">
+          <components>
+            <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="OLE_SRC - Person" refId="Package\DFT - Person\OLE_SRC - Person" usesDispositions="true" version="7">
+              <connections>
+                <connection connectionManagerID="{1625D865-2B8E-4A74-882F-1EA154054CAE}:external" connectionManagerRefId="Package.ConnectionManagers[Source]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DFT - Person\OLE_SRC - Person.Connections[OleDbConnection]">
+                </connection>
+              </connections>
+              <outputs>
+                <output name="Output" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i4" name="BusinessEntityID" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[BusinessEntityID]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="2" name="PersonType" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[PersonType]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="bool" name="NameStyle" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[NameStyle]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="8" name="Title" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Title]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="FirstName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[FirstName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="MiddleName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[MiddleName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="LastName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[LastName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="10" name="Suffix" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Suffix]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="i4" name="EmailPromotion" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[EmailPromotion]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="nText" name="AdditionalContactInfo" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[AdditionalContactInfo]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="nText" name="Demographics" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Demographics]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="guid" name="rowguid" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[rowguid]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="dbTimeStamp" name="ModifiedDate" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[ModifiedDate]">
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[BusinessEntityID]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[BusinessEntityID]" name="BusinessEntityID" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[BusinessEntityID]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[PersonType]" length="2" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[PersonType]" name="PersonType" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[PersonType]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="bool" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[NameStyle]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[NameStyle]" name="NameStyle" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[NameStyle]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Title]" length="8" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Title]" name="Title" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Title]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[FirstName]" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[FirstName]" name="FirstName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[FirstName]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[MiddleName]" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[MiddleName]" name="MiddleName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[MiddleName]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[LastName]" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[LastName]" name="LastName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[LastName]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Suffix]" length="10" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Suffix]" name="Suffix" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Suffix]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[EmailPromotion]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[EmailPromotion]" name="EmailPromotion" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[EmailPromotion]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="nText" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[AdditionalContactInfo]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[AdditionalContactInfo]" name="AdditionalContactInfo" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[AdditionalContactInfo]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="nText" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[Demographics]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Demographics]" name="Demographics" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Demographics]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="guid" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[rowguid]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[rowguid]" name="rowguid" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[rowguid]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                    <outputColumn dataType="dbTimeStamp" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].ExternalColumns[ModifiedDate]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[ModifiedDate]" name="ModifiedDate" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[ModifiedDate]" truncationRowDisposition="FailComponent">
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output isErrorOut="true" name="Error" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error]">
+                  <externalMetadataColumns>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[BusinessEntityID]" name="BusinessEntityID" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[BusinessEntityID]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="2" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[PersonType]" name="PersonType" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[PersonType]">
+                    </outputColumn>
+                    <outputColumn dataType="bool" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[NameStyle]" name="NameStyle" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[NameStyle]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="8" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Title]" name="Title" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Title]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[FirstName]" name="FirstName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[FirstName]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[MiddleName]" name="MiddleName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[MiddleName]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="50" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[LastName]" name="LastName" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[LastName]">
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="10" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Suffix]" name="Suffix" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Suffix]">
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[EmailPromotion]" name="EmailPromotion" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[EmailPromotion]">
+                    </outputColumn>
+                    <outputColumn dataType="nText" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[AdditionalContactInfo]" name="AdditionalContactInfo" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[AdditionalContactInfo]">
+                    </outputColumn>
+                    <outputColumn dataType="nText" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Demographics]" name="Demographics" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[Demographics]">
+                    </outputColumn>
+                    <outputColumn dataType="guid" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[rowguid]" name="rowguid" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[rowguid]">
+                    </outputColumn>
+                    <outputColumn dataType="dbTimeStamp" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ModifiedDate]" name="ModifiedDate" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ModifiedDate]">
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ErrorCode]" specialFlags="1">
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DFT - Person\OLE_SRC - Person.Outputs[Error].Columns[ErrorColumn]" specialFlags="2">
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[Person].[Person]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable">
+                </property>
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+                </property>
+                <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable">
+                </property>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1250</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping">
+                </property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="OLE_DST - Person" refId="Package\DFT - Person\OLE_DST - Person" usesDispositions="true" version="4">
+              <connections>
+                <connection connectionManagerID="{A1CD7874-E898-4512-BD95-89F5FE7E6D2A}:external" connectionManagerRefId="Package.ConnectionManagers[Destination]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DFT - Person\OLE_DST - Person.Connections[OleDbConnection]">
+                </connection>
+              </connections>
+              <inputs>
+                <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="OLE_SRC - Person_Output_OLE_DST - Person" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i4" name="BusinessEntityID" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[BusinessEntityID]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="2" name="PersonType" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[PersonType]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="bool" name="NameStyle" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[NameStyle]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="8" name="Title" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[Title]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="FirstName" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[FirstName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="MiddleName" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[MiddleName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="50" name="LastName" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[LastName]">
+                    </externalMetadataColumn>
+                    <externalMetadataColumn dataType="wstr" length="10" name="Suffix" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[Suffix]">
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn cachedDataType="i4" cachedName="BusinessEntityID" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[BusinessEntityID]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[BusinessEntityID]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[BusinessEntityID]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="2" cachedName="PersonType" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[PersonType]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[PersonType]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[PersonType]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="bool" cachedName="NameStyle" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[NameStyle]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[NameStyle]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[NameStyle]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="8" cachedName="Title" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[Title]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Title]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[Title]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="FirstName" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[FirstName]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[FirstName]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[FirstName]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="MiddleName" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[MiddleName]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[MiddleName]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[MiddleName]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="LastName" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[LastName]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[LastName]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[LastName]">
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="10" cachedName="Suffix" externalMetadataColumnId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].ExternalColumns[Suffix]" lineageId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output].Columns[Suffix]" refId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person].Columns[Suffix]">
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DFT - Person\OLE_DST - Person.Outputs[Error]" synchronousInputId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person]">
+                  <externalMetadataColumns>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_DST - Person.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DFT - Person\OLE_DST - Person.Outputs[Error].Columns[ErrorCode]" specialFlags="1">
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DFT - Person\OLE_DST - Person.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DFT - Person\OLE_DST - Person.Outputs[Error].Columns[ErrorColumn]" specialFlags="2">
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[Person]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable">
+                </property>
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+                </property>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1250</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+          </components>
+          <paths>
+            <path endId="Package\DFT - Person\OLE_DST - Person.Inputs[OLE_SRC - Person_Output_OLE_DST - Person]" name="OLE_SRC - Person_Output_OLE_DST - Person" refId="Package\DFT - Person.Paths[OLE_SRC - Person_Output_OLE_DST - Person]" startId="Package\DFT - Person\OLE_SRC - Person.Outputs[Output]">
+            </path>
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{5959A051-4BB5-4D02-9FDB-C87A8BE7376D}" DTS:From="Package\Truncate" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Truncate_To_DFT - Person" DTS:refId="Package.PrecedenceConstraints[Constraint_Truncate_To_DFT - Person]" DTS:To="Package\DFT - Person">
+    </DTS:PrecedenceConstraint>
+  </DTS:PrecedenceConstraints>
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+</DTS:Executable>
