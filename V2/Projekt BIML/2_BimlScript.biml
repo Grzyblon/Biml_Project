@@ -1,27 +1,37 @@
-<Biml xmlns="http://schemas.varigence.com/biml.xsd">
-  <!-- <# var tablesList = new List<string>(){"Person","PersonPhone"}; #> -->
-  <Connections>        
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">   
+  <!--<# var tablesList = new List<string>(){"Person","PersonPhone"}; #>-->   
+  <Connections>            
     <OleDbConnection Name="Source" ConnectionString="Data Source=.;Initial Catalog=AdventureWorks2012;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
     <OleDbConnection Name="Destination" ConnectionString="Data Source=.;Initial Catalog=Baza_testowa;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
   </Connections>  
   <Packages>
-    <Package Name="Paczka Druga" ConstraintMode="Linear">
+    <Package Name="Paczka Druga" ConstraintMode="Linear"> <!--ConstraintMode="Parallel"-->
       <Connections>
         <Connection ConnectionName="Source"/>
         <Connection ConnectionName="Destination"/>
       </Connections>
-      <Tasks>        
+      <Tasks>
         <# foreach (var item in tablesList) { #>
-          <Dataflow Name="DFT - <#=item#>">
-            <Transformations>
-              <OleDbSource Name="OLE_SRC - <#=item#>" ConnectionName="Source">
-                <ExternalTableInput Table="[Person].[<#=item#>]"/>
-              </OleDbSource>
-              <OleDbDestination Name="OLE_DST - <#=item#>" ConnectionName="Destination" >
-                <ExternalTableOutput Table="[dbo].[<#=item#>]"/>
-              </OleDbDestination>
-            </Transformations>
-          </Dataflow>
+          <!--<Container Name="CNT - <#=item#>" ConstraintMode="Linear">
+          <Tasks>-->
+            
+            <ExecuteSQL Name="Truncate <#=item#>" ConnectionName="Destination">
+		            <DirectInput>TRUNCATE TABLE [dbo].[<#=item#>];</DirectInput>
+	          </ExecuteSQL>
+          
+            <Dataflow Name="DFT - <#=item#>">
+              <Transformations>
+                <OleDbSource Name="OLE_SRC - <#=item#>" ConnectionName="Source">
+                  <ExternalTableInput Table="[Person].[<#=item#>]"/>
+                </OleDbSource>
+                <OleDbDestination Name="OLE_DST - <#=item#>" ConnectionName="Destination" >
+                  <ExternalTableOutput Table="[dbo].[<#=item#>]"/>
+                </OleDbDestination>
+              </Transformations>
+            </Dataflow>
+            
+          <!--</Tasks>
+          </Container>-->
         <# } #>
       </Tasks>
       </Package>
